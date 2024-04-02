@@ -1,59 +1,54 @@
-# Sensoteq Technical Challenge
+# Desafío Técnico Nodejs
 
-The assessment involves accessing a provided PostgreSQL database and returning results via a small set of APIs to be built through the use of Javascript. There are only a few requirements that must be met when completing the assessment:
+La evaluación implica acceder a una base de datos PostgreSQL y devolver resultados a través de una API que se construirá mediante el uso de JavaScript. Solo hay algunos requisitos que deben cumplirse al completar la evaluación:
 
-1. Any Javascript runtime can be used
-2. Use a package manager such as pnpm, bun, npm or yarn
-3. PostgreSQL must be used
+1. Se puede usar cualquier entorno de ejecución de JavaScript (Nodejs en este caso).
+2. Use un administrador de paquetes como pnpm, bun, npm o yarn.
+3. Se debe usar PostgreSQL (puede instalar una DB localmente o de manera remota <https://neon.tech/>).
 
-## Assessment Details
-The provided database will contain multiple tables; the ER model for it is provided below. The database is named `dvdrental`.
+## Detalles de la Evaluación
 
-![image](https://user-images.githubusercontent.com/21364333/197232749-2ad14346-40a1-4b21-94a1-713ed23cdd5f.png)
+El modelo relacional contendrá múltiples tablas.
 
-Not all the tables in this diagram will be needed but pay attention when interacting with the various tables, especially when writing, to not have any unintended side effects.
+![imagen](https://user-images.githubusercontent.com/21364333/197232749-2ad14346-40a1-4b21-94a1-713ed23cdd5f.png)
 
-## Requirements
-The following requirements should be met by your API. For the sake of this assessment four separate endpoints should be developed, one for each requirement.
+No todas las tablas en este diagrama serán necesarias, pero preste atención al interactuar con las diversas tablas, especialmente al escribir, para no tener efectos secundarios no deseados.
 
-1. Customers wish to know all the movies in a category - given the category return a list of films. The `film_id`, `title`, `description` and `rental_rate` should be returned. The `GET` request will have the query string parameters specified below.
+## Requisitos
 
-   - `category_name` - The name of the category which should be searched for.
+Los siguientes requisitos deben cumplirse mediante su API. Para esta evaluación, se deben desarrollar cuatro puntos finales separados, uno para cada requisito.
 
-2. A new customer is joining the system, give them all the various details needed. The new customer may only exist in one of the pre-existing cities as no new stores have opened. It is expected that both the customer and address tables will be fully populated for the new customer, the `POST` request will contain the parameters specified below. Any other parameters not specified in the `POST` should be populated automatically (e.g. `active`).
-   - `store_id` - The ID of the store where the customer was signed up
-   - `first_name` - the customer's first name
-   - `last_name` - the customer's last name
-   - `email` - the customer's email address
-   - `phone` - the customer's phone number
-   - `address` and `address2` - the customer's address lines
-   - `district` - the district of the city in which the customer lives
-   - `city_id` - the ID of the city in which the customer lives
-   - `postal_code` - The postal code of the customer
-   
-3. Deletion of a customer is occurring due to GDPR issues, their rentals and payments cannot be deleted but their customer record and address must be removed. The endpoint should take the customer ID for deletion. The `DELETE` request will contain the parameters specified below.
-   - `customer_id` - The ID of the customer to be deleted.
-   
-4. Server-side searching for films is required, given some or all of the following, an incomplete (or complete) film title or a length that the film must be below. For example a title of "to" and length 60 might be provided, this would return 6 films. When returning the category and language of the film should be included. The `GET` request will have the query string parameters specified below.
-   - `title` - an optional title of film parameter
-   - `length` - an optional length of film parameter
-   
-   
-## Criteria
-In general the criteria for the assessment is relatively flexible, we will look at any work you produce/provide to us. We will be assessing code quality, use of packages, general design and structure and compliance with general industry expectations.
+### Punto 1: Películas
 
-Be prepared to discuss your solution at interview as it is likely we will take some interesting points and ask for explanation as to why that was the particular method used in the solution.
+- **Obtener todas las películas:** Devuelve una lista de películas. Deben devolverse el `film_id`, `title`, `description` y `rental_rate`.
+- **Obtener una película por ID:** Devuelve una película por `film_id`.
+- **Crear una película:** Crea una película con los campos: `film_id`, `title`, `description` y `rental_rate`.
+- **Actualizar una película:** Actualiza una película con los campos: `film_id`, `title`, `description` y `rental_rate`.
+- **Eliminar una película:** Elimina una película por `film_id`.
 
-Finally, do not overthink/work this assessment, we hope to get an idea of how you approach the problem but if a particular part proves to be too difficult then work on other components, we will assess everything you provide us with.
+### Punto 2: Búsqueda de Películas con Filtrado
 
-## Setup
-Use the following docker image to create a restored PostgreSQL database with workable data: https://hub.docker.com/r/sensoteq/tech-assessment-db
+- **Filtrado por cantidad de registros:** Se requiere agregar un filtro por cantidad de registros al endpoint de búsqueda de películas en nuestra API Node.js. `GET`, `POST`, `PUT`, `DELETE`
 
-For example:
-`docker run -p 8989:5432 -e POSTGRES_PASSWORD=postgres -d sensoteq/tech-assessment-db:latest`
+### Punto 3: Guarde logs al consumir un endpoint
 
-This will create a docker container accessible via port 8989 and a user with the login credentials of postgres:postgres.
-You are entirely free to adjust your docker containers run parameters.
+- **Crear logs en todos los endpoints:** La API creada debe guardar un log despues de consumir algun endpoint y guarde dichos logs en un archivo local, puede usar la libreria `winston`.
 
+### Punto 4: Documente su API
 
+- **Documentar los endpoints:** La API creada con los puntos anteriores debe estar documentada, puede usar Swagger o cualquier otra libreria de documentacion.
 
+## Criterios
+
+En general, los criterios para la evaluación son relativamente flexibles, revisaremos cualquier trabajo que produzca/nos proporcione. Evaluaremos la calidad del código, el uso de paquetes, el diseño y la estructura general, y el cumplimiento con las expectativas generales de la industria.
+
+Esté preparado para discutir su solución en la entrevista, ya que es probable que tomemos algunos puntos interesantes y solicitemos una explicación sobre por qué se usó ese método en particular en la solución.
+
+Finalmente, no piense demasiado/trabaje en esta evaluación, esperamos tener una idea de cómo aborda el problema, pero si alguna parte resulta ser demasiado difícil, trabaje en otros componentes, evaluaremos todo lo que nos proporcione.
+
+## Configuración
+
+Puede utilizar la siguiente imagen de Docker para crear una base de datos PostgreSQL restaurada con datos funcionales: [sensoteq/tech-assessment-db](https://hub.docker.com/r/sensoteq/tech-assessment-db) o crear su propia DB con el mismo formato del modelo anterior.
+
+Por ejemplo:
+Esto creará un contenedor de Docker accesible a través del puerto 8989 y un usuario con las credenciales de inicio de sesión de postgres:postgres.
