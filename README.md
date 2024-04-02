@@ -28,7 +28,7 @@ Los siguientes requisitos deben cumplirse mediante su API. Para esta evaluación
 
 ### Punto 2: Búsqueda de Películas con Filtrado
 
-- **Filtrado por cantidad de registros:** Se requiere agregar un filtro por cantidad de registros al endpoint de búsqueda de películas en nuestra API Node.js. `GET`, `POST`, `PUT`, `DELETE`
+- **Filtrado por cantidad de registros:** Se requiere agregar un filtro por cantidad de registros al endpoint de búsqueda de películas en nuestra API Node.js.
 
 ### Punto 3: Guarde logs al consumir un endpoint
 
