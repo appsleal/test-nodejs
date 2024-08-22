@@ -1,0 +1,26 @@
+{
+  "name": "test-nodejs2",
+  "version": "1.0.0",
+  "description": "La evaluación implica acceder a una base de datos PostgreSQL y devolver resultados a través de una API que se construirá mediante el uso de JavaScript. Solo hay algunos requisitos que deben cumplirse al completar la evaluación:",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "pg": "^8.12.0",
+    "sequelize": "^6.37.3",
+    "sequelize-typescript": "^2.1.6"
+  }
+}
